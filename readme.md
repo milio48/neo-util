@@ -105,6 +105,11 @@ Don't want to touch the Blogger XML? A simpler method is to inject your JavaScri
 [example.js](example.js)
 
 
+<details>
+
+<summary>Contributing</summary>
+
+
 
 # Contributing
 
@@ -168,3 +173,4 @@ Here are some ideas for potential improvements and new features. Feel free to su
 *   **More Examples:** Add more diverse examples of using the `neoApi()` data.
 *   **Tutorials:** Write guides on building specific features (like a navbar or comment section) using this project.
 *   **Automated Tests:** Implement basic automated tests (e.g., using Jest with JSDOM) to verify the parser's output for different sample HTML inputs.
+</details>
