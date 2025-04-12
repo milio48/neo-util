@@ -26,7 +26,7 @@ See how the theme renders different Blogger page types. The underlying HTML stru
 
 1.  **Upload Theme:** Go to your Blogger Dashboard -> Theme -> Edit HTML. Replace the *entire* editor content with the code from `neo-util.xml`. Save.
     *(The theme already includes the `<script>` tag to load the parser from its hosted location - no extra JS installation needed).*
-
+[![](https://data.jsdelivr.com/v1/package/gh/milio48/neo-util/badge)](https://www.jsdelivr.com/package/gh/milio48/neo-util)
 ## Accessing the Data ("API")
 
 After the page loads (`DOMContentLoaded`), access the parsed data using the global variable `window.neoApi()`.

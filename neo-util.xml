@@ -256,6 +256,6 @@
   //]]>
   </script>
 
-<!-- <script src='neo-parser.js' type='text/javascript'></script> -->
+<script src='https://cdn.jsdelivr.net/gh/milio48/neo-util@d4f8df88f808c61a81ecfc91a78f963153ce214b/neo-parser.min.js' type='text/javascript'></script>
 </body>
 </html>
