@@ -16,6 +16,16 @@ See how the theme renders different Blogger page types. The underlying HTML stru
 6.  **Search Results Page:** [`https://neo-util.blogspot.com/search?q=what`](https://neo-util.blogspot.com/search?q=what)
 7.  **Error Page (404):** [`https://neo-util.blogspot.com/404`](https://neo-util.blogspot.com/404)
 
+## Demo Purpose Only
+add parameter ?inject=url.js to the URL to inject example.js
+
+## [`Homepage : https://neo-util.blogspot.com?inject=example.js`](https://neo-util.blogspot.com?inject=https://cdn.jsdelivr.net/gh/milio48/neo-util@2ab4e10c69b91a760917b310e4e73831760c7da6/example.js)
+## [`Single Post : https://neo-util.blogspot.com/2025/04/coding-my-first-game.html?inject=example.js`](https://neo-util.blogspot.com/2025/04/coding-my-first-game.html?inject=https://cdn.jsdelivr.net/gh/milio48/neo-util@2ab4e10c69b91a760917b310e4e73831760c7da6/example.js)
+
+
+See [example.js](example.js)
+
+
 ## How it Works (Briefly)
 
 1.  **Theme Renders HTML:** The minimalist XML theme (`neo-util.xml`) outputs blog data using specific HTML structures (tables for lists, semantic tags for single pages).
@@ -96,13 +106,10 @@ Use Blogger's UI without editing XML. Go to Blogger Dashboard -> Layout. Find th
 
 *(There might also be a "Global Scripts/HTML (All Pages)" section if you included that option in your theme for code that should run everywhere).*
 
-## Examples
+## Practical Example
 Don't want to touch the Blogger XML? A simpler method is to inject your JavaScript directly into an HTML/JavaScript gadget through the Blogger Layout settings. See the screenshot below for an example.
 
 ![neo-widget-js](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8sDaWd8M1BA-HDmiSLN6CGYRtsFwJUZhyphenhyphenwpLhcrg-6yzc_4gMRFhgNBLNDGlI2-W94oOBtvfkRYaiyMNrUW3cYLOVR517oI6dEfzK_7vaTqD7e6MFIvhRbuPi93Bnssk0h3BfpLKGUv_Ym7dF7KJifipdxu7_Z-qzv-j259CxXabswM5r0ry6toc2273x/s16000/neo-widget-js.jpg)
-
-### Styling & Enjoying the Theme
-[example.js](example.js)
 
 
 <details>
