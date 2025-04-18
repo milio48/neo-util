@@ -206,14 +206,13 @@
 
 
   <!-- Conditional Widget Sections -->
-  <b:section class='neo-hidden' cond='data:view.isHomepage' id='neo-widget-home' name='Home Widgets Only (Hidden)' showaddelement='yes' />
-  <b:section class='neo-hidden' cond='data:blog.pageType == "static_page"' id='neo-widget-page' name='Page Widgets Only (Hidden)' showaddelement='yes' />
-  <b:section class='neo-hidden' cond='data:blog.pageType == "item"' id='neo-widget-post' name='Post Widgets Only (Hidden)' showaddelement='yes' />
-  <b:section class='neo-hidden' cond='data:blog.pageType == "archive"' id='neo-widget-archive' name='Archive Widgets Only (Hidden)' showaddelement='yes' />
-  <b:section class='neo-hidden' cond='data:blog.pageType == "index" and !data:view.isHomepage' id='neo-widget-index' name='Index Widgets Only (Hidden)' showaddelement='yes' />
-  <b:section class='neo-hidden' cond='data:blog.pageType == "error_page"' id='neo-widget-error' name='Error Widgets Only (Hidden)' showaddelement='yes' />
+  <b:section class='neo-hidden' cond='data:view.isHomepage' id='neo-widget-home' name='Home Widgets (Hidden)' showaddelement='yes' />
+  <b:section class='neo-hidden' cond='data:blog.pageType == "static_page"' id='neo-widget-page' name='Page Widgets (Hidden)' showaddelement='yes' />
+  <b:section class='neo-hidden' cond='data:blog.pageType == "item"' id='neo-widget-post' name='Post Widgets (Hidden)' showaddelement='yes' />
+  <b:section class='neo-hidden' cond='data:blog.pageType == "archive"' id='neo-widget-archive' name='archive Widgets (Hidden)' showaddelement='yes' />
+  <b:section class='neo-hidden' cond='data:blog.pageType == "index" and !data:view.isHomepage' id='neo-widget-index' name='index Widgets (Hidden)' showaddelement='yes' />
+  <b:section class='neo-hidden' cond='data:blog.pageType == "error_page"' id='neo-widget-error' name='error Widgets (Hidden)' showaddelement='yes' />
   <b:section class='neo-hidden' id='neo-widget-global' name='Global Scripts/HTML All Pages (Hidden)' showaddelement='yes' />
-  <b:section id='neo-widget-visible' name='Global HTML All Pages (Visible)' showaddelement='yes' />
  
  
 
