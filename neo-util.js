@@ -307,3 +307,85 @@
     // console.log("neo-parser: window.neoApi function is now available.");
 
 })(); // End IIFE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * neo-render.js - Using Handlebars.js
+ * Rendering Template String to HTML using neoRender()
+ */
+const loadHandlebars = () => {
+    return new Promise((resolve, reject) => {
+      if (window.Handlebars) return resolve();
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js';
+      script.async = true;
+      script.onload = resolve;
+      script.onerror = reject;
+      (document.head || document.documentElement).appendChild(script);
+    });
+  };
+  
+
+  const NeoRender = async (templateString) => {
+    if (!templateString || typeof templateString !== 'string') {
+        console.error('NeoRender requires a valid HTML template string as an argument.');
+        return;
+    }
+  
+    try {
+      await loadHandlebars();
+      registerHelpers();
+      const api = await window.neoApi?.();
+  
+      if (!api) throw new Error('API data missing or invalid.');
+  
+      const template = Handlebars.compile(templateString);
+      const renderedHtmlString = template(api);
+  
+      const parser = new DOMParser();
+      const newDoc = parser.parseFromString(renderedHtmlString, 'text/html');
+  
+      const newBodyContent = newDoc.body?.innerHTML;
+      const newHeadNodes = newDoc.head?.childNodes;
+  
+      if (newBodyContent === undefined || newBodyContent === null) {
+          throw new Error("Could not parse body content from the rendered template.");
+      }
+  
+      if (newHeadNodes && document.head) {
+          Array.from(newHeadNodes).forEach(node => {
+              document.head.appendChild(document.adoptNode(node));
+          });
+       } else {
+          console.warn("Could not find new head nodes or existing document head to merge.");
+      }
+  
+      document.body.innerHTML = newBodyContent;
+      console.log('Page body replaced.');
+  
+    } catch (error) {
+      console.error('Failed to render page content:', error);
+    }
+  };
+  
