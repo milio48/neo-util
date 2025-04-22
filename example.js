@@ -10,8 +10,8 @@
  * - Handlebars.js is included.
  *
  * Place this script in a [Global Scripts/HTML All Pages (Hidden)] gadget in Blogger Layout.
- * 
- * 
+ *
+ *
  * Please add a Loading Overlay to Waiting for DOM and neoApi() to load.
  */
 
@@ -20,22 +20,31 @@
 
 
 
-  document.addEventListener('DOMContentLoaded', () => {
-    if (typeof window.neoApi === 'function') {
-      NeoRender(myTemplateString);
-    } else {
-      console.error('Fatal: neoApi function not found.');
-    }
-  });
-  
-  const registerHelpers = () => {
-    if (!window.Handlebars) return;
-    Handlebars.registerHelper('eq', (a, b) => a === b);
-    Handlebars.registerHelper('now', () => new Date().getFullYear());
-  };
-  
 
-  const myTemplateString = `
+function startLoading() {
+  const o = document.createElement("div");
+  o.id = "load";
+  o.style = `position:fixed;inset:0;background:#fff;z-index:9999;display:grid;place-items:center;font:1.5rem sans-serif`;
+  o.textContent = "Loading...";
+  document.body.appendChild(o);
+} startLoading();
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof window.neoApi === "function") {
+    NeoRender(myTemplateString);
+    // Loading Bar will be removed automatically by NeoRender
+  } else {
+    console.error("Fatal: neoApi function not found.");
+  }
+});
+
+const registerHelpers = () => {
+  if (!window.Handlebars) return;
+  Handlebars.registerHelper("eq", (a, b) => a === b);
+  Handlebars.registerHelper("now", () => new Date().getFullYear());
+};
+
+const myTemplateString = `
   <!DOCTYPE html>
   <html lang="en">
   <head>
