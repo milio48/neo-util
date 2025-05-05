@@ -1,6 +1,6 @@
 /**
  * ====================================================================
- * Neo Blog Renderer - Boilerplate Consumer Script
+ * Neo-util - Boilerplate Consumer Script
  * ====================================================================
  * - Waits for DOM and neoApi function.
  * - Fetches data using neoApi().
@@ -72,6 +72,11 @@
          footer { margin-top: 3rem; text-align: center; color: var(--color-muted); font-size: 0.9rem; }
          @media (max-width: 640px) { body { padding: 1rem; } .post { padding: 1rem; } }
      </style>
+      <!-- CSS EXTERNAL -->
+      <style src="https://localhost/css/template-specific.css"></style>
+
+      <!-- JS EXTERNAL -->
+      <script src="https://localhost/js/template-specific.js" defer><\/script> <!-- Escape End Tag Script to prevent injection -->
  </head>
  <body>
      <header>
