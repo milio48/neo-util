@@ -347,7 +347,7 @@ const loadHandlebars = () => {
   };
   
 
-  const neoRender = async (templateString) => {
+  window.neoRender = async (templateString) => {
     if (!templateString || typeof templateString !== 'string') {
         console.error('neoRender requires a valid HTML template string as an argument.');
         return;
