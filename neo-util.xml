@@ -257,6 +257,6 @@
   //]]>
   </script>
 
-<script src='https://cdn.jsdelivr.net/gh/milio48/neo-util@55acff1e90be5b88a5efea1b41eb5cf19a83f97f/neo-util.min.js' type='text/javascript'></script>
+<script src='https://cdn.jsdelivr.net/gh/milio48/neo-util@d20135f2ee6e5855d5017ca20924975755f4cd52/neo-util.min.js' type='text/javascript'></script>
 </body>
 </html>
