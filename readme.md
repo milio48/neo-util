@@ -1,36 +1,245 @@
-# Blogger Data Provider Theme & DOM Parser
+# Neo-util: JavaScript-Based Templating System for Blogger
 
-## The Short Version (TL;DR)
+## Overview
+Neo-util is a templating system for Blogger that enables theme development using JavaScript exclusively. With an API-based approach, neo-util simplifies the theme creation process by separating presentation logic from Blogger data.
 
-This theme focuses on rendering essential Blogger data into clean HTML. This allows **you** to focus purely on building your frontend using the structured data provided, without wrestling with complex Blogger templating for visuals. Think of it as a **data layer** for your Blogger site.
+## Live Demo
+🔗 [https://neo-util.blogspot.com/](https://neo-util.blogspot.com/)
 
-## Live Demo / Page Examples
-
-See how the theme renders different Blogger page types. The underlying HTML structure is what the parser reads.
-
-1.  **Homepage:** [`https://neo-util.blogspot.com/`](https://neo-util.blogspot.com/)
-2.  **Item Page (Single Post):** [`https://neo-util.blogspot.com/2025/04/coding-my-first-game.html`](https://neo-util.blogspot.com/2025/04/coding-my-first-game.html) *(Note: Specific post URL may change)*
-3.  **Static Page:** [`https://neo-util.blogspot.com/p/example-static-page.html`](https://neo-util.blogspot.com/p/example-static-page.html) *(Note: Example, your static page path might differ)*
-4.  **Archive Page:** [`https://neo-util.blogspot.com/2025/`](https://neo-util.blogspot.com/2025/)
-5.  **Label Page:** [`https://neo-util.blogspot.com/search/label/dev`](https://neo-util.blogspot.com/search/label/dev)
-6.  **Search Results Page:** [`https://neo-util.blogspot.com/search?q=what`](https://neo-util.blogspot.com/search?q=what)
-7.  **Error Page (404):** [`https://neo-util.blogspot.com/404`](https://neo-util.blogspot.com/404)
-
-## How it Works (Briefly)
-
-1.  **Theme Renders HTML:** The minimalist XML theme (`neo-util.xml`) outputs blog data using specific HTML structures (tables for lists, semantic tags for single pages).
-2.  **Parser Reads HTML:** The theme includes a script tag loading `neo-parser.js` (hosted externally). This script runs in the browser, analyzes the HTML DOM, and extracts the data.
-3.  **Data Object Available:** The parser makes the extracted data available globally via `window.neoApi()`.
+**Demo Features:**
+- Enable style mode via toggle in the bottom bar
+- Try the `window.neoApi()` function in the Dev Tools Console
 
 ## Setup
+1. Blogger Dashboard - Theme - Edit HTML - Replace with neo-util.xml code - Save
+   - (XML already includes neo-util.js and Handlebars.js)
+   - [![](https://data.jsdelivr.com/v1/package/gh/milio48/neo-util/badge)](https://www.jsdelivr.com/package/gh/milio48/neo-util)
+2. Put your custom code on Layout -> Add a Gadget -> HTML/JavaScript
+   - This is where you'll place your template code for rendering pages
+   - See the Tutorial section below for examples
 
-1.  **Upload Theme:** Go to your Blogger Dashboard -> Theme -> Edit HTML. Replace the *entire* editor content with the code from `neo-util.xml`. Save.
-    *(The theme already includes the `<script>` tag to load the parser from its hosted location - no extra JS installation needed).*
-[![](https://data.jsdelivr.com/v1/package/gh/milio48/neo-util/badge)](https://www.jsdelivr.com/package/gh/milio48/neo-util)
-## Accessing the Data ("API")
+## Key Features
+- **JavaScript-Centric Development** - Build Blogger themes entirely with JavaScript
+- **Comprehensive Data API** - Access Blogger data through `window.neoApi()`
+- **PageType Segmentation** - Full support for various Blogger page types
+- **Widget System** - Modular template file management (HTML, CSS, JS)
+- **Handlebars Integration** - Powerful templating engine support
+- **Lightweight** - Lightweight solution without heavy dependencies
 
-After the page loads (`DOMContentLoaded`), access the parsed data using the global variable `window.neoApi()`.
+## How Neo-util Works
+1. **Data Provision** - neo-util transforms raw Blogger data into a clean JavaScript structure
+2. **Template Rendering** - Provides a rendering system based on Handlebars.js
+3. **PageType Specialization** - Separates display logic based on page type
+4. **Widget Management** - Flexible widget system as a pseudo file manager
 
+## Pagetype 
+| Link                                                            | Blogger PageType | neoApi PageType |
+|-----------------------------------------------------------------|------------------|-----------------|
+| https://neo-util.blogspot.com                                   | homepage         | homepage        |
+| https://neo-util.blogspot.com/p/example-static-page.html        | static_page      | static_page     |
+| https://neo-util.blogspot.com/2025/04/coding-my-first-game.html | item             | item            |
+| https://neo-util.blogspot.com/2025/                             | archive          | archive         |
+| https://neo-util.blogspot.com/search/label/dev                  | index            | label           |
+| https://neo-util.blogspot.com/search?q=what                     | index            | search          |
+| https://neo-util.blogspot.com/404                               | error_page       | error           |
+> See [API Documentation](api-docs.md) for complete details
+
+## SCREENSHOT
+| WIDGET SYSTEM | JS BLOCK | EXAMPLE|
+|---|---|---|
+| [![widget-system.jpg](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbxHhlQnfEkFArujpZZ9hqMM1wKmlRqZbUI1SLUukN_5LMY0aWyPNOCWOQbSquzTX8gOW4m9DnsZy8dUGklK0TgT3clhkMZC_PqKPGBEHOy3Fn67whXM4wZhGsudj7oWiPYzHXL2r6hAppg1VpT-3jYztQmj5W-ecfAsz0REXhq8Jalh73Fp61YqAifNAa/w200/widget-system.jpg 'widget-system.jpg')](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbxHhlQnfEkFArujpZZ9hqMM1wKmlRqZbUI1SLUukN_5LMY0aWyPNOCWOQbSquzTX8gOW4m9DnsZy8dUGklK0TgT3clhkMZC_PqKPGBEHOy3Fn67whXM4wZhGsudj7oWiPYzHXL2r6hAppg1VpT-3jYztQmj5W-ecfAsz0REXhq8Jalh73Fp61YqAifNAa/s16000/widget-system.jpg) | [![block-js.jpg](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6ryL8ks0umWs6hVM9_ZZO9jTv0KzyZI2V4TwC5NcETkuI2FkS5TV9yrVvksOdJ9C4h90si0dXZmEzJEqzyvS8hn96PzWUcTOiSd3RDYmSub83Hv-c086RlSnnNYLCsjLdGH_O8ZHPsGKZZnD2j_PmHOmHRGZugpo_RqfrttMY5kcycws9k_p_T0YCiXOi/w200/block-js.jpg 'block-js.jpg')](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6ryL8ks0umWs6hVM9_ZZO9jTv0KzyZI2V4TwC5NcETkuI2FkS5TV9yrVvksOdJ9C4h90si0dXZmEzJEqzyvS8hn96PzWUcTOiSd3RDYmSub83Hv-c086RlSnnNYLCsjLdGH_O8ZHPsGKZZnD2j_PmHOmHRGZugpo_RqfrttMY5kcycws9k_p_T0YCiXOi/s1600/block-js.jpg) | [![screenshot.jpg](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiA5MNWENrCi-Jb8xwi5Ux6hyphenhyphentrkbSFDaZHlxKfie7ngWfDDcRgd-N5XHLHEimFTzKtgGSJsV1dVzve67l0GwR0sbs4-_VKM404wlrDdu3or-4DuyrtIRKx8JGYq8bJ-J-dXHm4Jc5-njLthAlKAie2W_wV4CSi3skBcOjeoUuysqwA3WaN2BT5m4f8N-2V/w200/screenshot.jpg 'screenshot.jpg')](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiA5MNWENrCi-Jb8xwi5Ux6hyphenhyphentrkbSFDaZHlxKfie7ngWfDDcRgd-N5XHLHEimFTzKtgGSJsV1dVzve67l0GwR0sbs4-_VKM404wlrDdu3or-4DuyrtIRKx8JGYq8bJ-J-dXHm4Jc5-njLthAlKAie2W_wV4CSi3skBcOjeoUuysqwA3WaN2BT5m4f8N-2V/s1600/screenshot.jpg) |
+
+
+### Inject CSS
+Method 1 : Programmatically via JavaScript
+```html
+<script>
+  document.head.appendChild(
+    Object.assign(document.createElement('style'), {
+      textContent: `
+      body { background-color: lightblue; }
+      h1 { color: darkred; }
+      `
+    })
+  );
+</script>
+```
+Method 2 : Directly with style tags
+```html
+<style>
+  body { background-color: lightblue; }
+  h1 { color: darkred; }
+</style>
+```
+
+
+### Inject JS
+Simply create a script tag
+```html
+<script>
+  alert('Hello');
+</script>
+```
+
+### Injecting HTML + Handlebars.js included
+<details>
+
+<summary>Expand Code example.js</summary>
+
+```html
+<script>
+ 
+function startLoading() {
+  const o = document.createElement("div");
+  o.id = "load";
+  o.style = `position:fixed;inset:0;background:#fff;z-index:9999;display:grid;place-items:center;font:1.5rem sans-serif`;
+  o.textContent = "Loading...";
+  document.body.appendChild(o);
+} startLoading();
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof window.neoApi === "function") {
+    neoRender(myTemplateString);
+    console.log(window.neoApi());
+    // Loading Bar will be removed automatically by neoRender
+  } else {
+    console.error("Fatal: neoApi function not found.");
+  }
+});
+
+const registerHelpers = () => {
+  if (!window.Handlebars) return;
+  Handlebars.registerHelper("eq", (a, b) => a === b);
+  Handlebars.registerHelper("or", function() {
+    const args = Array.prototype.slice.call(arguments, 0, -1);
+    return args.some(arg => !!arg);
+  });
+  Handlebars.registerHelper("now", () => new Date().getFullYear());
+};
+
+
+const myTemplateString = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{blog.title}}</title>
+    <style>
+        :root { --color-primary: #2563eb; --color-text: #334155; --color-muted: #64748b; --color-bg: #f8fafc; }
+        body { font-family: 'Inter', -apple-system, sans-serif; line-height: 1.6; max-width: 768px; margin: 0 auto; padding: 1.5rem; color: var(--color-text); background: var(--color-bg); }
+        a { color: var(--color-primary); text-decoration: none; transition: all 0.2s; }
+        a:hover { opacity: 0.8; text-decoration: underline; }
+        header { margin-bottom: 3rem; text-align: center; }
+        h1, h2, h3 { margin: 0 0 1rem; line-height: 1.3; }
+        .post { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .meta { color: var(--color-muted); font-size: 0.85rem; margin-bottom: 0.75rem; display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .label { background: #e2e8f0; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+        .snippet { color: var(--color-text); margin: 0.5rem 0 0; }
+        footer { margin-top: 3rem; text-align: center; color: var(--color-muted); font-size: 0.9rem; }
+        @media (max-width: 640px) { body { padding: 1rem; } .post { padding: 1rem; } }
+    </style>
+      <!-- CSS EXTERNAL -->
+      <style src="https://localhost/css/template-specific.css"></style>
+
+      <!-- JS EXTERNAL -->
+      <script src="https://localhost/js/template-specific.js" defer><\/script> <!-- Escape End Tag Script to prevent injection -->
+</head>
+<body>
+    <header>
+        <h1><a href="{{blog.homepageUrl}}">{{blog.title}}</a></h1>
+	<form class="search-form" action="/search" method="get"> <input class="search-input" type="search" name="q" placeholder="Search posts..." {{#if (eq pageType "search")}}value="{{blog.searchQuery}}"{{/if}} aria-label="Search" > </form>
+    </header>
+
+    <main>
+        {{#if (eq pageType "homepage")}}
+            {{#each page}}
+                <article class="post">
+                    <h2><a href="{{url}}">{{title}}</a></h2>
+                    <div class="meta">
+                        <time datetime="{{publishedIso}}">{{publishedFormatted}}</time>
+                        {{#if labels.length}}• {{#each labels}}<a href="{{url}}" class="label">{{name}}</a>{{/each}}{{/if}}
+                    </div>
+                    <p class="snippet">{{{snippet}}}</p>
+                </article>
+            {{/each}}
+
+        {{else if (eq pageType "item")}}
+            <article class="post">
+                <h1>{{page.title}}</h1>
+                <div class="meta">
+                    <time datetime="{{page.publishedIso}}">{{page.publishedFormatted}}</time>
+                    {{#if page.labels.length}}• {{#each page.labels}}<a href="{{url}}" class="label">{{name}}</a>{{/each}}{{/if}}
+                </div>
+                <div class="snippet">{{{page.bodyHtml}}}</div>
+            </article>
+
+        {{else if (eq pageType "static_page")}}
+            <article class="post">
+                <h1>{{page.title}}</h1>
+                <div class="snippet">{{{page.bodyHtml}}}</div>
+            </article>
+
+        {{else if (or (eq pageType "archive") (eq pageType "label") (eq pageType "search"))}}
+            <h2>
+                {{#if (eq pageType "archive")}}Archive: {{blog.pageName}}
+                {{else if (eq pageType "label")}}Label: {{blog.pageName}}
+                {{else}}Search: "{{blog.searchQuery}}"{{/if}}
+            </h2>
+            {{#each page}}
+                <article class="post">
+                    <h3><a href="{{url}}">{{title}}</a></h3>
+                    <div class="meta">
+                        <time datetime="{{publishedIso}}">{{publishedFormatted}}</time>
+                        {{#if labels.length}}• {{#each labels}}<a href="{{url}}" class="label">{{name}}</a>{{/each}}{{/if}}
+                    </div>
+                    <p class="snippet">{{{snippet}}}</p>
+                </article>
+            {{/each}}
+
+        {{else}}
+            <article class="post">
+                <h1>Page Not Found</h1>
+                <p class="snippet">The requested page could not be displayed.</p>
+            </article>
+        {{/if}}
+    </main>
+
+    <footer>
+        <p>&copy; {{now}} {{blog.title}}</p>
+    </footer>
+</body>
+</html>
+`;
+
+
+</script>
+```
+> When defining myTemplateString variable, write script closing tag with escaped end tag. `<\/script>`
+</details>
+
+## API Code
+```javascript
+// main variable
+console.log(window.neoApi());
+
+// public function
+neoRender(myTemplateString);
+
+// custom helper
+const registerHelpers = () => {
+  if (!window.Handlebars) return;
+  Handlebars.registerHelper("eq", (a, b) => a === b);
+  Handlebars.registerHelper("or", function() {
+    const args = Array.prototype.slice.call(arguments, 0, -1);
+    return args.some(arg => !!arg);
+  });
+  Handlebars.registerHelper("now", () => new Date().getFullYear());
+};
+```
+
+## API Docs
+[API Documentation for the window.neoApi()](api-docs.md)
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
   if (window.neoApi()) {
@@ -50,127 +259,10 @@ document.addEventListener('DOMContentLoaded', () => {
 ```
 
 The `neoApi()` object typically contains:
-*   `neoApi().blog`: General blog information (title, URL, etc.)
-*   `neoApi().pageType`: The type of the current page (e.g., 'homepage', 'item', 'label').
-*   `neoApi().page`: Page-specific data (an array of posts for lists, or an object for single items/pages).
+* `neoApi().blog`: General blog information (title, URL, etc.)
+* `neoApi().pageType`: The type of the current page (e.g., 'homepage', 'item', 'label')
+* `neoApi().page`: Page-specific data (an array of posts for lists, or an object for single items/pages)
 
-*(Refer to `neo-parser.js` or console output for the exact structure).*
-
-## Api Docs
-
-[API Documentation for the window.neoApi()](api-docs.md)
-
-## Injecting Your Custom Code
-
-You might want to add your *own* JavaScript (e.g., your frontend framework code, analytics) that uses the `neoApi()` data. You can inject code that runs only on specific page types using these methods:
-
-### Method 1: Via Theme XML `<script>` Blocks
-
-Directly edit the theme's XML (`neo-util.xml`). Find the conditional blocks near the end of the `<body>` and add your code inside the appropriate `//<![CDATA[ ... //]]>` section:
-
-```xml
-  <!-- Conditional <script> Blocks (Placeholders - Best Practice) -->
-  <b:if cond='data:view.isHomepage'>
-    <!-- Code 1. Homepage -->
-    <script type='text/javascript'>//<![CDATA[
-      // Your Homepage-specific JS here
-      // console.log("Homepage JS runs");
-      // if(window.neoApi()) { /* Use neoApi */ }
-    //]]></script>
-  <b:elseif cond='data:blog.pageType == "item"'/>
-    <!-- Code 2. Post -->
-    <script type='text/javascript'>//<![CDATA[
-      // Your Item Page-specific JS here
-    //]]></script>
-  </b:if>
-  <!-- ... other conditions ... -->
-```
-
-### Method 2: Via Blogger Layout Gadgets
-
-Use Blogger's UI without editing XML. Go to Blogger Dashboard -> Layout. Find the conditional widget sections (e.g., "Home Widgets", "Post Widgets", "Index (Label/Search) Widgets") and add an "HTML/JavaScript" gadget containing your code (including `<script>` tags if needed).
-
-```xml
-   <!-- Conditional Widget Sections -->
-```
-
-*(There might also be a "Global Scripts/HTML (All Pages)" section if you included that option in your theme for code that should run everywhere).*
-
-## Examples
-Don't want to touch the Blogger XML? A simpler method is to inject your JavaScript directly into an HTML/JavaScript gadget through the Blogger Layout settings. See the screenshot below for an example.
-
-![neo-widget-js](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8sDaWd8M1BA-HDmiSLN6CGYRtsFwJUZhyphenhyphenwpLhcrg-6yzc_4gMRFhgNBLNDGlI2-W94oOBtvfkRYaiyMNrUW3cYLOVR517oI6dEfzK_7vaTqD7e6MFIvhRbuPi93Bnssk0h3BfpLKGUv_Ym7dF7KJifipdxu7_Z-qzv-j259CxXabswM5r0ry6toc2273x/s16000/neo-widget-js.jpg)
-
-### Styling & Enjoying the Theme
-[example.js](example.js)
-
-
-<details>
-
-<summary>Contributing</summary>
-
-
-
-# Contributing
-
-Contributions are welcome! We appreciate any help, whether it's reporting bugs, suggesting features, improving documentation, or submitting code changes.
-
-**How to Contribute:**
-
-1.  **Issues:** Please open an issue first to report bugs or discuss potential new features or significant changes. This helps coordinate efforts.
-2.  **Pull Requests:** For code contributions, please fork the repository, make your changes on a separate branch, and then submit a pull request linked to the relevant issue (if applicable). Ensure your code follows the existing style and includes comments where necessary.
-
-### Current Features (What this project *already* does)
-
-This project currently provides the following core functionalities:
-
-*   **Minimalist Data Theme (`neo-util.xml`):** A Blogger XML theme focused on rendering essential blog data into predictable, structured HTML with minimal styling.
-*   **DOM Parser (`neo-parser.js`):** A JavaScript parser (included via the theme) that analyzes the HTML generated by the theme.
-*   **JavaScript Data API (`window.neoApi()`):** Exposes a global function that returns a structured JavaScript object containing the parsed data after the DOM is ready.
-*   **Page Type Detection:** Automatically identifies the current page type (Homepage, Item, Static Page, Archive, Label Search, Query Search, Error).
-*   **Structured Data Extraction:** Parses key information into the `neoApi()` object, including:
-    *   **Blog Info (`neoApi().blog`):** Blog title, homepage URL, current page URL, page title, context name (for Archive/Label), search query.
-    *   **Page Data (`neoApi().page`):**
-        *   For lists (Homepage, Archive, Label, Search): An array of post objects (`postId`, `title`, `url`, `publishedIso`, `publishedFormatted`, `author`, `labels` array, `snippet`, `firstImageUrl`).
-        *   For single items (`item`): A post detail object (`postId`, `title`, `url`, `publishedIso`, `publishedFormatted`, `labels` array, `bodyHtml`).
-        *   For static pages (`static_page`): A page detail object (`pageId`, `title`, `url`, `bodyHtml`).
-        *   For errors/unknown (`error`, `unknown`, `parsing_error`): A message object (`title`, `message`, optional error details).
-*   **Data/Presentation Decoupling:** Enables developers to build custom frontends using any JavaScript framework or library by consuming the `neoApi()` data, separate from Blogger's rendering logic.
-*   **Example Consumer Script (`example.js`):** Provides a basic example of how to fetch data and render a simple UI.
-
-### To-Do List & Potential Future Enhancements (Ideas for Contributors)
-
-Here are some ideas for potential improvements and new features. Feel free to suggest others!
-
-**Parser (`neo-parser.js`) Enhancements:**
-
-*   **Parse Comment Data:**
-    *   Extract comment count for posts (might require theme changes to render the count).
-    *   Potentially parse basic details of recent comments if the theme can render them reliably.
-*   **Parse Author Details:** Extract author name/profile URL on `item` pages (currently marked as *not parsed* in API docs, requires checking if `itemprop="author"` or similar data is available/renderable by the theme).
-*   **Parse Pagination Data:** Extract URLs for "Next Page" / "Previous Page" on list views (Homepage, Archive, Label, Search) if the theme renders these links with identifiable selectors. This would enable custom pagination controls.
-*   **Parse Related Posts:** If the theme includes a related posts widget/section with structured data, parse this information.
-*   **Improve Error Handling:** Provide more specific error messages within the `parsing_error` object based on where parsing failed.
-*   **Increase Robustness:** Explore ways to make the parser slightly more tolerant of minor, non-breaking variations in the theme's HTML (challenging with DOM scraping).
-
-**Theme (`neo-util.xml`) Enhancements:**
-
-*   **Render Data for Comments/Pagination:** Ensure the theme renders the necessary HTML elements (with clear IDs/classes) if features like comment count or pagination parsing are to be added.
-*   **Theme Configuration (Optional):** Consider adding simple theme options (e.g., via `b:includable` variables) to toggle the rendering of certain data sections, although this might conflict with the minimalist goal.
-
-**Frontend / Consumer Features (Things to build *using* the API):**
-
-*   **Dynamic Navigation Bar:** Create a navigation menu using data from `neoApi().blog` or potentially by parsing a specific menu gadget's HTML (if the theme renders it predictably).
-*   **Blogger Comment Integration:** Build a UI to display and potentially submit Blogger comments using the `postId` and standard Blogger comment frame/API.
-*   **Third-Party Comment Systems:** Integrate systems like Disqus using the `postId` and `url` from the API.
-*   **Client-Side Search:** Implement a live search feature that filters the posts available in `neoApi().page` on list views.
-*   **Advanced Pagination:** Build custom "Load More", infinite scroll, or numbered pagination controls using parsed pagination data (if added).
-*   **Image Lightboxes/Galleries:** Enhance the display of images within `bodyHtml`.
-*   **Framework Examples:** Create example implementations using popular frameworks (React, Vue, Svelte, Alpine.js) showing how to integrate `neoApi()`.
-
-**Documentation & Testing:**
-
-*   **More Examples:** Add more diverse examples of using the `neoApi()` data.
-*   **Tutorials:** Write guides on building specific features (like a navbar or comment section) using this project.
-*   **Automated Tests:** Implement basic automated tests (e.g., using Jest with JSDOM) to verify the parser's output for different sample HTML inputs.
-</details>
+## Websites Using neo-util
+1. https://neo-util.blogspot.com/
+2. ...
