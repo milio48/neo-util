@@ -30,7 +30,7 @@
 
  document.addEventListener("DOMContentLoaded", () => {
    if (typeof window.neoApi === "function") {
-     NeoRender(myTemplateString);
+     neoRender(myTemplateString);
      console.log(window.neoApi());
      // Loading Bar will be removed automatically by NeoRender
    } else {
